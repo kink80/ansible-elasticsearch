@@ -133,14 +133,6 @@
     line='session    required   pam_limits.so'
   notify: Restart Elasticsearch
 
-- name: elastic-install | Configure initd java opts in /etc/init.d/elasticsearch
-  lineinfile:
-    dest=/etc/init.d/elasticsearch
-    regexp='^(DAEMON_OPTS=".*-Des.max-open-files=true")$'
-    insertafter='^(DAEMON_OPTS=".*CONF_DIR")$'
-    line='DAEMON_OPTS="$DAEMON_OPTS -Des.max-open-files=true"'
-  notify: Restart Elasticsearch
-
 - name: elastic-install | Configuring Elasticsearch elasticsearch.yml Node
   template:
     src=elasticsearch.yml.j2

@@ -29,6 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "vagrant-main.yml"
     ansible.extra_vars = { user: "vagrant" }
     ansible.limit = 'all'
+    ansible.raw_arguments = ["--connection=paramiko"]
     # ansible.verbose = 'vvvv'
   end
 end
