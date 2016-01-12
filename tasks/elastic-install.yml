@@ -92,6 +92,20 @@
   when: elasticsearch_max_open_files is defined
   notify: Restart Elasticsearch
 
+- name: Configure soft memory limits
+  lineinfile:
+    dest=/etc/security/limits.conf
+    regexp='^{{ elasticsearch_user }}     soft    memlock    unlimited'
+    insertafter=EOF
+    line='{{ elasticsearch_user }}     soft    memlock    unlimited'
+
+- name: Configure hard mem limits
+  lineinfile:
+    dest=/etc/security/limits.conf
+    regexp='^{{ elasticsearch_user }}     hard    memlock    unlimited'
+    insertafter=EOF
+    line='{{ elasticsearch_user }}     hard    memlock    unlimited'
+
 - name: elastic-install | Configure limits max_locked_memory
   lineinfile:
     dest=/etc/security/limits.conf
