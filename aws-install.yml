@@ -1,0 +1,19 @@
+---
+
+#########################
+# Elasticsearch install #
+#########################
+
+- hosts: all_nodes
+  user: ubuntu
+  sudo: yes
+
+  vars_files:
+    - defaults/main.yml
+    - vars/aws-vars.yml
+
+  tasks:
+    - include: tasks/main.yml
+  
+  handlers:
+    - include: handlers/main.yml
